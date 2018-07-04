@@ -2,13 +2,19 @@ document.getElementById("StartTimer").addEventListener("click", StartTimer);
 
 
 function StartTimer() {
-var d = new Date().getTime();
-var countDownDate = new Date(d+ 25*60000);
+myStorage = window.localStorage;
+var cd = localStorage.getItem('CountDown');
+var d = new Date().getTime();    
+    if(cd !== null && cd>d) {
+        var countDownDate = cd;
+    }
+    else {
+        var countDownDate = new Date(d+ 25*60000).getTime();    
+    }
 var intervalID = 0;
 var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
-
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
@@ -25,6 +31,8 @@ var x = setInterval(function() {
     if(distance > 0 ) {
     document.getElementById("StartTimer").style.display = "none";
     }
+    localStorage.setItem('Start_Time', now);
+    localStorage.setItem('CountDown',countDownDate);
 },1000);
 
 var y = function() {
