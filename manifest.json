@@ -14,9 +14,10 @@
       "default_icon": {
         "48": "icons/tomato.png"
       },
-      "default_title": "Study"
+      "default_title": "Study",
+      "default_popup": "popup/timer.html"
     },
-    
+
   "content_scripts": [
     {
       "matches": ["*://*.reddit.com/*"],
