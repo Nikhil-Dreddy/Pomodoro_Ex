@@ -3,12 +3,12 @@ document.getElementById("StartTimer").addEventListener("click", StartTimer);
 
 function StartTimer() {
 var d = new Date().getTime();
-var countDownDate = new Date(d+ 0.1*60000);
+var countDownDate = new Date(d+ 25*60000);
 var intervalID = 0;
 var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
-    
+
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
@@ -30,7 +30,7 @@ var x = setInterval(function() {
 var y = function() {
 
     var now = new Date().getTime();
-    var RelaxDate = new Date(d+ 0.50*60000);
+    var RelaxDate = new Date(d+ 5*60000);
     var distance = RelaxDate - now;
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
