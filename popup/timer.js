@@ -1,5 +1,11 @@
 document.getElementById("StartTimer").addEventListener("click", StartTimer);
-
+document.addEventListener('DOMContentLoaded', function() {
+var cd = localStorage.getItem('CountDown');
+var d = new Date().getTime();    
+    if(cd !== null && cd>d) {
+        StartTimer();
+    }
+}, false);
 
 function StartTimer() {
 myStorage = window.localStorage;
@@ -9,7 +15,7 @@ var d = new Date().getTime();
         var countDownDate = cd;
     }
     else {
-        var countDownDate = new Date(d+ 25*60000).getTime();    
+        var countDownDate = new Date(d+ 1*60000).getTime();    
     }
 var intervalID = 0;
 var x = setInterval(function() {
@@ -26,7 +32,8 @@ var x = setInterval(function() {
         document.getElementById("timer").innerHTML = "Your Done!, Take a 5 minute break";
         var audio = new Audio('yay.mp3');
         audio.play();
-        intervalID = setInterval(y, 1000);    
+        var rt = localStorage.getItem('RelaxTime');
+        intervalID = setInterval(y(rt), 1000);    
     }
     if(distance > 0 ) {
     document.getElementById("StartTimer").style.display = "none";
@@ -35,10 +42,15 @@ var x = setInterval(function() {
     localStorage.setItem('CountDown',countDownDate);
 },1000);
 
-var y = function() {
-
+var y = function(rt) {
+    if(rt !== null && rt>d) {
+        var RelaxDate = rt;
+    }
+    else {
+        var RelaxDate = new Date(d+ 5*60000);
+    }
+    
     var now = new Date().getTime();
-    var RelaxDate = new Date(d+ 5*60000);
     var distance = RelaxDate - now;
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -57,5 +69,6 @@ var y = function() {
     if(distance > 0 ) {
     document.getElementById("StartTimer").style.display = "none";
     }
+    localStorage.setItem('RelaxTime',countDownDate);
 }
 }
