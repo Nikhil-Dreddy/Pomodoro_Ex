@@ -1,0 +1,20 @@
+{
+
+  "manifest_version": 2,
+  "name": "Pomodoro",
+  "version": "1.0",
+
+  "description": "Used to help users study",
+
+  "icons": {
+    "48": "icons/tomato.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.reddit.com/*"],
+      "js": ["Pomodoro.js"]
+    }
+  ]
+
+}
