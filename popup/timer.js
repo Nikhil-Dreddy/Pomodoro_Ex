@@ -8,18 +8,18 @@ var intervalID = 0;
 var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
-
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
-    // Output the result in an element with id="demo"
+    // Output the result in an element with id="timer"
     document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
 
     if (distance < 0) {
         clearInterval(x);
         document.getElementById("timer").innerHTML = "Your Done!, Take a 5 minute break";
+        var audio = new Audio('yay.mp3');
+        audio.play();
         intervalID = setInterval(y, 1000);    
     }
     if(distance > 0 ) {
@@ -35,13 +35,15 @@ var y = function() {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
-    // Output the result in an element with id="demo"
+    // Output the result in an element with id="timer"
     document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
 
     if (distance < 0) {
         clearInterval(intervalID);
         clearInterval(y);
-        document.getElementById("timer").innerHTML = "Time";
+        var audio = new Audio('boom.mp3');
+        audio.play();
+        document.getElementById("timer").innerHTML = "New Session?";
         document.getElementById("StartTimer").style.display = "inline-block";
     }
     if(distance > 0 ) {
