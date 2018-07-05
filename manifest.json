@@ -18,9 +18,13 @@
       "default_popup": "popup/timer.html"
     },
 
+  "background": {
+      "scripts": ["background-script.js"]
+  },
+  
   "content_scripts": [
     {
-      "matches": ["*://*.reddit.com/*"],
+      "matches": ["<all_urls>"],
       "js": ["Pomodoro.js"]
     }
   ]

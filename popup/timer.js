@@ -7,6 +7,14 @@ var d = new Date().getTime();
     }
 }, false);
 
+function notifyExtension(e) { 
+    browser.runtime.sendMessage({"url": 1});
+  }
+  /*
+  Add notifyExtension() as a listener to click events.
+  */
+ document.getElementById("StartTimer").addEventListener("click", notifyExtension);
+
 function StartTimer() {
 myStorage = window.localStorage;
 var cd = localStorage.getItem('CountDown');
