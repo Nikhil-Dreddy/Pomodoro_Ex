@@ -7,6 +7,10 @@ var d = new Date().getTime();
     }
 }, false);
 
+
+/*
+Used to call the background timer function to create the sound effect
+*/
 function notifyExtension(e) { 
     browser.runtime.sendMessage({"url": 1});
   }
@@ -14,16 +18,25 @@ function notifyExtension(e) {
   Add notifyExtension() as a listener to click events.
   */
  document.getElementById("StartTimer").addEventListener("click", notifyExtension);
+var RelaxTime;
+
+function getRelaxtime() {
+    return RelaxTime;
+}
+function setRelaxTime(x) {
+    RelaxTime = x;
+}
 
 function StartTimer() {
 myStorage = window.localStorage;
+var RelaxDate;
 var cd = localStorage.getItem('CountDown');
 var d = new Date().getTime();    
     if(cd !== null && cd>d) {
         var countDownDate = cd;
     }
     else {
-        var countDownDate = new Date(d+ 1*60000).getTime();    
+        var countDownDate = new Date(d+ 0.1*60000).getTime();    
     }
 var intervalID = 0;
 var x = setInterval(function() {
@@ -34,14 +47,19 @@ var x = setInterval(function() {
     
     // Output the result in an element with id="timer"
     document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
-
     if (distance < 0) {
         clearInterval(x);
         document.getElementById("timer").innerHTML = "Your Done!, Take a 5 minute break";
-        var audio = new Audio('yay.mp3');
-        audio.play();
         var rt = localStorage.getItem('RelaxTime');
-        intervalID = setInterval(y(rt), 1000);    
+        if(rt !== null && rt>now) {
+            RelaxDate = rt;
+
+        }
+        else {
+            RelaxDate = new Date(now+ 5*60000);
+        }
+        this.setRelaxTime(RelaxDate.getTime());
+        intervalID = setInterval(y, 1000);    
     }
     if(distance > 0 ) {
     document.getElementById("StartTimer").style.display = "none";
@@ -50,16 +68,10 @@ var x = setInterval(function() {
     localStorage.setItem('CountDown',countDownDate);
 },1000);
 
-var y = function(rt) {
-    if(rt !== null && rt>d) {
-        var RelaxDate = rt;
-    }
-    else {
-        var RelaxDate = new Date(d+ 5*60000);
-    }
-    
+var y = function() {
+    RelaxTime = this.getRelaxtime();
     var now = new Date().getTime();
-    var distance = RelaxDate - now;
+    var distance = RelaxTime - now;
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
