@@ -4,8 +4,7 @@ function notify(message) {
     var d = new Date().getTime(); 
     if(rt>d){
         RelaxDate = rt;
-        y;
-        intervalID = setInterval(y, 1000);   
+        var intervalID = setInterval(y, 1000);   
     }
     else {
         var x = setInterval(function() {
@@ -34,28 +33,28 @@ function notify(message) {
         },1000); 
     }
     
-    var y = function() {
-        var rt = localStorage.getItem('RelaxTime');
-        if(rt !== null && rt>=now) {
-        var now = new Date().getTime();
-        var distance = rt - now;
-        if (distance < 0) {
-            clearInterval(intervalID);
-            clearInterval(y);
-            var audio = new Audio('boom.mp3');
-            audio.play();
-        }
-        localStorage.setItem('RelaxTime',rt);
-    }
-    else if(rt !== null) {
+}
+
+ function y() {
+    var rt = localStorage.getItem('RelaxTime');
+    if(rt !== null && rt>=now) {
+    var now = new Date().getTime();
+    var distance = rt - now;
+    if (distance < 0) {
         clearInterval(intervalID);
         clearInterval(y);
         var audio = new Audio('boom.mp3');
         audio.play();
     }
-    }
+    localStorage.setItem('RelaxTime',rt);
 }
-
+else if(rt !== null) {
+    clearInterval(intervalID);
+    clearInterval(y);
+    var audio = new Audio('boom.mp3');
+    audio.play();
+}
+}
 /*
 Assign `notify()` as a listener to messages from the content script.
 */

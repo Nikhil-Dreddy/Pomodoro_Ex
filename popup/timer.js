@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 var cd = localStorage.getItem('CountDown');
 var d = new Date().getTime();
 var rt = localStorage.getItem('RelaxTime');
+notifyExtension();
     if(cd !== null && cd>d || rt>d) {
         StartTimer();
     }
@@ -13,7 +14,7 @@ var rt = localStorage.getItem('RelaxTime');
 /*
 Used to call the background timer function to create the sound effect
 */
-function notifyExtension(e) { 
+function notifyExtension() { 
     browser.runtime.sendMessage({"url": 1});
   }
   /*
@@ -28,7 +29,10 @@ function getRelaxtime() {
 function setRelaxTime(x) {
     RelaxTime = x;
 }
-
+var m;
+function get_m() {
+    return m;
+}
 function StartTimer() {
 myStorage = window.localStorage;
 var RelaxDate;
@@ -66,7 +70,7 @@ var intervalID = 0;
         
                 }
                 else {
-                    RelaxDate = new Date(now+ 5*60000);
+                    RelaxDate = new Date(now+ 1*60000);
                 }
                 this.setRelaxTime(RelaxDate.getTime());
                 intervalID = setInterval(y, 1000);    
@@ -114,8 +118,8 @@ var y = function() {
     document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
 
     if (distance < 0) {
-        clearInterval(intervalID);
-        clearInterval(y);
+        clearInterval(window.get_m());
+        clearInterval(z);
         var audio = new Audio('boom.mp3');
         audio.play();
         document.getElementById("timer").innerHTML = "New Session?";
