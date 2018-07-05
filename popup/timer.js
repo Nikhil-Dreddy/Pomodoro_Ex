@@ -1,8 +1,9 @@
 document.getElementById("StartTimer").addEventListener("click", StartTimer);
 document.addEventListener('DOMContentLoaded', function() {
 var cd = localStorage.getItem('CountDown');
-var d = new Date().getTime();    
-    if(cd !== null && cd>d) {
+var d = new Date().getTime();
+var rt = localStorage.getItem('RelaxTime');
+    if(cd !== null && cd>d || rt>d) {
         StartTimer();
     }
 }, false);
@@ -30,8 +31,10 @@ function setRelaxTime(x) {
 function StartTimer() {
 myStorage = window.localStorage;
 var RelaxDate;
+var rt = localStorage.getItem('RelaxTime');
 var cd = localStorage.getItem('CountDown');
 var d = new Date().getTime();    
+    
     if(cd !== null && cd>d) {
         var countDownDate = cd;
     }
@@ -39,6 +42,7 @@ var d = new Date().getTime();
         var countDownDate = new Date(d+ 0.1*60000).getTime();    
     }
 var intervalID = 0;
+
 var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
@@ -66,7 +70,8 @@ var x = setInterval(function() {
     }
     localStorage.setItem('Start_Time', now);
     localStorage.setItem('CountDown',countDownDate);
-},1000);
+},1000) 
+
 
 var y = function() {
     RelaxTime = this.getRelaxtime();
@@ -89,6 +94,6 @@ var y = function() {
     if(distance > 0 ) {
     document.getElementById("StartTimer").style.display = "none";
     }
-    localStorage.setItem('RelaxTime',countDownDate);
+    localStorage.setItem('RelaxTime',RelaxTime);
 }
 }
