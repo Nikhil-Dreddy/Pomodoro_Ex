@@ -1,6 +1,14 @@
 function notify(message) {
-    
-    var x = setInterval(function() {
+    var rt = localStorage.getItem('RelaxTime');
+    var cd = localStorage.getItem('CountDown');
+    var d = new Date().getTime(); 
+    if(rt>d){
+        RelaxDate = rt;
+        y;
+        intervalID = setInterval(y, 1000);   
+    }
+    else {
+        var x = setInterval(function() {
         myStorage = window.localStorage;
         var cd = localStorage.getItem('CountDown');
         var d = new Date().getTime();    
@@ -23,7 +31,9 @@ function notify(message) {
             audio.play();
             intervalID = setInterval(y, 1000);   
     }
-    },1000);
+        },1000); 
+    }
+    
     var y = function() {
         var rt = localStorage.getItem('RelaxTime');
         if(rt !== null && rt>=now) {
