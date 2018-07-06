@@ -1,11 +1,18 @@
-var intervalID
-
+var intervalID;
+var z;
 function setIntervalID(x) {
     intervalID = x;
 }
 function getIntervalId() {
     return intervalID;
 }
+function get_z() {
+    return z;
+}
+function set_z(x) {
+    z=x;
+}
+
 function notify(message) {
     var rt = localStorage.getItem('RelaxTime');
     var cd = localStorage.getItem('CountDown');
@@ -27,8 +34,8 @@ function notify(message) {
             clearInterval(x);
             var audio = new Audio('popup/yay.mp3');
             audio.play();    
-            var z = setInterval(y, 1000);
-            this.setIntervalID(z);
+            z = setInterval(y, 1000);
+            this.set_z(z);
         }
         localStorage.setItem('Start_Time', now);
         localStorage.setItem('CountDown',countDownDate);
@@ -37,8 +44,11 @@ function notify(message) {
             clearInterval(x)
             var audio = new Audio('popup/yay.mp3');
             audio.play();
-            var z = setInterval(y, 1000);
-            this.setIntervalID(z);   
+            var d = new Date().getTime();   
+            RelaxDate = new Date(d+ 1*60000);
+            localStorage.setItem('RelaxTime',RelaxDate.getTime());
+            z = setInterval(y, 1000);
+            this.set_z(z);
     }
         },1000); 
     }
@@ -53,6 +63,7 @@ function notify(message) {
     var distance = rt - now;
     if (distance < 0) {
         clearInterval(this.getIntervalId());
+        clearInterval(this.get_z());
         clearInterval(y);
         var audio = new Audio('popup/boom.mp3');
         audio.play();
@@ -60,6 +71,7 @@ function notify(message) {
     localStorage.setItem('RelaxTime',rt);
 }
 else if(rt !== null) {
+    clearInterval(this.get_z());
     clearInterval(this.getIntervalId());
     clearInterval(y);
     var audio = new Audio('popup/boom.mp3');

@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
 var cd = localStorage.getItem('CountDown');
 var d = new Date().getTime();
 var rt = localStorage.getItem('RelaxTime');
-notifyExtension();
     if(cd !== null && cd>d || rt>d) {
+        notifyExtension();
         StartTimer();
     }
 }, false);
@@ -61,6 +61,7 @@ var intervalID = 0;
             
             // Output the result in an element with id="timer"
             document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+            document.getElementById("timer").style.color = "#ff2400"
             if (distance < 0) {
                 clearInterval(x);
                 document.getElementById("timer").innerHTML = "Your Done!, Take a 5 minute break";
@@ -91,7 +92,7 @@ var y = function() {
     
     // Output the result in an element with id="timer"
     document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
-
+    document.getElementById("timer").style.color = "#396516";
     if (distance < 0) {
         clearInterval(intervalID);
         clearInterval(y);
@@ -116,7 +117,7 @@ var y = function() {
     
     // Output the result in an element with id="timer"
     document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
-
+    document.getElementById("timer").style.color = "#396516";
     if (distance < 0) {
         clearInterval(window.get_m());
         clearInterval(z);

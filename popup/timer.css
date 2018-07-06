@@ -4,7 +4,7 @@ button {
   text-align: center;
   font-size: 1.5em;
   cursor: pointer;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: 'Open Sans', Cochin, Georgia, Times, 'Times New Roman', serif;
   background-color: #5da423;
   border: 1px solid #396516;
 }
@@ -16,7 +16,7 @@ button:hover {
   padding: 4px;
   text-align: center;
   font-size: 1.5em;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Open Sans', Courier, monospace;
 }
 .parent {
     display: flex;
